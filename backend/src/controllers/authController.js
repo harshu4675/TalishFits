@@ -32,6 +32,46 @@ const signup = asyncHandler(async (req, res) => {
     throw createError(409, "An account with this email already exists");
   }
 
+  const EMAIL_VERIFICATION_ENABLED =
+    process.env.EMAIL_VERIFICATION_ENABLED === "true";
+
+  if (!EMAIL_VERIFICATION_ENABLED) {
+    let user;
+
+    if (existingUser) {
+      existingUser.name = name;
+      existingUser.password = password;
+      existingUser.isEmailVerified = true;
+      existingUser.lastLogin = new Date();
+      await existingUser.save();
+      user = existingUser;
+    } else {
+      user = await User.create({
+        name,
+        email,
+        password,
+        rememberMe: rememberMe || false,
+        isEmailVerified: true,
+        lastLogin: new Date(),
+      });
+    }
+
+    const accessToken = generateAccessToken(user._id);
+    const refreshToken = generateRefreshToken(user._id);
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: false });
+
+    setTokenCookies(res, accessToken, refreshToken);
+
+    logger.info(`User signed up (email verification disabled): ${email}`);
+
+    return successResponse(res, 201, "Account created successfully", {
+      user: user.toSafeObject(),
+      accessToken,
+      requiresVerification: false,
+    });
+  }
+
   const otp = generateOTP();
   const otpExpires = new Date(Date.now() + 10 * 60 * 1000);
 
@@ -237,7 +277,10 @@ const login = asyncHandler(async (req, res) => {
     );
   }
 
-  if (!user.isEmailVerified) {
+  const EMAIL_VERIFICATION_ENABLED =
+    process.env.EMAIL_VERIFICATION_ENABLED === "true";
+
+  if (EMAIL_VERIFICATION_ENABLED && !user.isEmailVerified) {
     const otp = generateOTP();
     const otpExpires = new Date(Date.now() + 10 * 60 * 1000);
 
@@ -275,7 +318,6 @@ const login = asyncHandler(async (req, res) => {
     accessToken,
   });
 });
-
 const googleLogin = asyncHandler(async (req, res) => {
   const { credential } = req.body;
 

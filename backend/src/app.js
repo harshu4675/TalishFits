@@ -21,21 +21,25 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
   "http://127.0.0.1:3000",
-  process.env.CLIENT_URL,
   "https://talishfits.netlify.app",
+  process.env.CLIENT_URL,
 ].filter(Boolean);
 
 app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
-      if (
+
+      const isAllowed =
         allowedOrigins.includes(origin) ||
         origin.endsWith(".netlify.app") ||
-        origin.endsWith(".onrender.com")
-      ) {
+        origin.endsWith(".netlify.live");
+
+      if (isAllowed) {
         return callback(null, true);
       }
+
+      console.log("CORS blocked origin:", origin);
       return callback(null, true);
     },
     credentials: true,
@@ -45,15 +49,15 @@ app.use(
       "Authorization",
       "X-Refresh-Token",
       "Accept",
+      "Origin",
     ],
-    exposedHeaders: ["Set-Cookie"],
+    exposedHeaders: ["Set-Cookie", "Authorization"],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   }),
 );
 
 app.options("*", cors());
-
-app.options("*", cors());
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 1000,

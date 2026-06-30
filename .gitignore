@@ -192,9 +192,6 @@ certs/
 # ============================================
 # PWA & GENERATED ASSETS (Frontend)
 # ============================================
-frontend/public/icons/*.png
-frontend/public/icons/*.jpg
-!frontend/public/icons/.gitkeep
 frontend/public/sw.js.map
 frontend/public/workbox-*.js
 frontend/public/workbox-*.js.map

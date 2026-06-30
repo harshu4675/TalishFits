@@ -1,0 +1,158 @@
+# ============================================
+# TALISHFITS - Root .gitignore
+# ============================================
+
+# Dependencies
+node_modules/
+**/node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.output/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+**/.env
+**/.env.local
+**/.env.production
+**/.env.development
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+combined.log
+error.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage & Testing
+coverage/
+*.lcov
+.nyc_output/
+lib-cov/
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE & Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Uploads & Media (local)
+uploads/
+temp/
+tmp/
+*.tmp
+
+# Cloudinary local cache
+.cloudinary/
+
+# 3D Models (large files - use CDN instead)
+public/models/*.glb
+public/models/*.gltf
+public/models/*.fbx
+public/models/*.obj
+!public/models/.gitkeep
+
+# Lottie (optional - if using local files)
+# public/lottie/*.json
+
+# PWA icons (generated)
+public/icons/*.png
+!public/icons/.gitkeep
+
+# Package manager locks (keep one)
+# yarn.lock
+# pnpm-lock.yaml
+
+# Misc
+*.pem
+.vercel/
+.netlify/
+.render/
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Optional npm cache
+.npm/
+
+# Optional REPL history
+.node_repl_history
+
+# Yarn integrity file
+.yarn-integrity
+
+# dotenv environment variable files
+.env.vault
+
+# Serverless
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing
+.vscode-test/
+
+# Zip files
+*.zip
+*.tar.gz
+*.rar

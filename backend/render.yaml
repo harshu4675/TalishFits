@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: talishfits-api
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        fromDatabase:
+          name: talishfits-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://talishfits.vercel.app
+    healthCheckPath: /health
+    autoDeploy: true
+
+databases:
+  - name: talishfits-db
+    plan: free
+    databaseName: talishfits

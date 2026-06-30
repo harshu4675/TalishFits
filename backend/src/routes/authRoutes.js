@@ -28,9 +28,8 @@ router.post("/forgot-password", forgotPassword);
 router.put("/reset-password/:token", resetPassword);
 router.get("/verify-email/:token", verifyEmail);
 
-router.use(protect);
-router.get("/me", getMe);
-router.post("/logout", logout);
-router.put("/change-password", changePassword);
+router.get("/me", protect, getMe);
+router.post("/logout", protect, logout);
+router.put("/change-password", protect, changePassword);
 
 module.exports = router;

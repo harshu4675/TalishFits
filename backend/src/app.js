@@ -21,7 +21,6 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
   "http://127.0.0.1:3000",
-  "http://127.0.0.1:5173",
   process.env.CLIENT_URL,
   "https://talishfits.netlify.app",
 ].filter(Boolean);
@@ -30,7 +29,11 @@ app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin) || origin.endsWith(".netlify.app")) {
+      if (
+        allowedOrigins.includes(origin) ||
+        origin.endsWith(".netlify.app") ||
+        origin.endsWith(".onrender.com")
+      ) {
         return callback(null, true);
       }
       return callback(null, true);
@@ -46,6 +49,8 @@ app.use(
     exposedHeaders: ["Set-Cookie"],
   }),
 );
+
+app.options("*", cors());
 
 app.options("*", cors());
 
@@ -90,12 +95,10 @@ const loadRoute = (path) => {
       console.error(`Route ${path} does not export a valid middleware/router`);
       const dummyRouter = express.Router();
       dummyRouter.all("*", (req, res) => {
-        res
-          .status(500)
-          .json({
-            success: false,
-            message: `Route ${path} not properly configured`,
-          });
+        res.status(500).json({
+          success: false,
+          message: `Route ${path} not properly configured`,
+        });
       });
       return dummyRouter;
     }
@@ -104,12 +107,10 @@ const loadRoute = (path) => {
     console.error(`Failed to load route ${path}:`, err.message);
     const dummyRouter = express.Router();
     dummyRouter.all("*", (req, res) => {
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: `Route module error: ${err.message}`,
-        });
+      res.status(500).json({
+        success: false,
+        message: `Route module error: ${err.message}`,
+      });
     });
     return dummyRouter;
   }

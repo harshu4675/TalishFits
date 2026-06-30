@@ -1,6 +1,7 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+  base = "client"
+  command = "npm install && npm run build"
+  publish = "client/dist"
 
 [build.environment]
   NODE_VERSION = "20"
@@ -14,7 +15,6 @@
   for = "/icons/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "image/png"
 
 [[headers]]
   for = "/manifest.json"
@@ -35,3 +35,4 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Access-Control-Allow-Origin = "*"

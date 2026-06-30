@@ -196,9 +196,6 @@ frontend/public/sw.js.map
 frontend/public/workbox-*.js
 frontend/public/workbox-*.js.map
 
-client/public/icons/*.png
-client/public/icons/*.jpg
-!client/public/icons/.gitkeep
 
 
 # ============================================

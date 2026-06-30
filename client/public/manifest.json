@@ -52,31 +52,5 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ],
-  "shortcuts": [
-    {
-      "name": "Today's Workout",
-      "short_name": "Workout",
-      "url": "/workout",
-      "icons": [
-        { "src": "/icons/icon-96.png", "sizes": "96x96", "type": "image/png" }
-      ]
-    },
-    {
-      "name": "Log Meal",
-      "short_name": "Nutrition",
-      "url": "/diet",
-      "icons": [
-        { "src": "/icons/icon-96.png", "sizes": "96x96", "type": "image/png" }
-      ]
-    },
-    {
-      "name": "View Progress",
-      "short_name": "Progress",
-      "url": "/progress",
-      "icons": [
-        { "src": "/icons/icon-96.png", "sizes": "96x96", "type": "image/png" }
-      ]
-    }
   ]
 }

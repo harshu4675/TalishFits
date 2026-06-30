@@ -1,36 +1,72 @@
 # ============================================
-# TALISHFITS - Root .gitignore
+# TALISHFITS - FULL STACK GITIGNORE
+# Frontend (React/Vite) + Backend (Node.js)
 # ============================================
 
-# Dependencies
+
+# ============================================
+# DEPENDENCIES
+# ============================================
 node_modules/
 **/node_modules/
 .pnp
 .pnp.js
+.yarn/
+jspm_packages/
+bower_components/
 
-# Build outputs
+
+# ============================================
+# ENVIRONMENT VARIABLES
+# ============================================
+.env
+.env.*
+!.env.example
+!.env.template
+*.env
+
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+client/.env
+client/.env.*
+!client/.env.example
+
+server/.env
+server/.env.*
+!server/.env.example
+
+
+# ============================================
+# BUILD OUTPUTS
+# ============================================
 dist/
 build/
 out/
 .next/
 .nuxt/
 .output/
+.vercel/
+.netlify/
 
-# Environment files
-.env
-.env.local
-.env.development
-.env.development.local
-.env.test
-.env.test.local
-.env.production
-.env.production.local
-**/.env
-**/.env.local
-**/.env.production
-**/.env.development
+frontend/dist/
+frontend/build/
+backend/dist/
+backend/build/
+client/dist/
+client/build/
+server/dist/
+server/build/
 
-# Logs
+
+# ============================================
+# LOGS
+# ============================================
 logs/
 *.log
 npm-debug.log*
@@ -38,22 +74,39 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-combined.log
-error.log
+.pnpm-debug.log*
 
-# Runtime data
+backend/logs/
+backend/*.log
+backend/combined.log
+backend/error.log
+
+
+# ============================================
+# RUNTIME DATA
+# ============================================
 pids/
 *.pid
 *.seed
 *.pid.lock
 
-# Coverage & Testing
+
+# ============================================
+# TESTING & COVERAGE
+# ============================================
 coverage/
 *.lcov
 .nyc_output/
+.coverage/
 lib-cov/
+test-results/
+playwright-report/
+playwright/.cache/
 
-# Cache
+
+# ============================================
+# CACHE
+# ============================================
 .cache/
 .parcel-cache/
 .eslintcache
@@ -63,19 +116,34 @@ lib-cov/
 .rts2_cache_es/
 .rts2_cache_umd/
 *.tsbuildinfo
+.vite/
+node_modules/.vite/
+**/node_modules/.vite/
+.turbo/
 
-# OS files
+
+# ============================================
+# OPERATING SYSTEM FILES
+# ============================================
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
 ehthumbs.db
+ehthumbs_vista.db
 Thumbs.db
 desktop.ini
+$RECYCLE.BIN/
+*.lnk
 
-# IDE & Editor
+
+# ============================================
+# IDE & EDITORS
+# ============================================
 .vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
 .idea/
 *.suo
 *.ntvs*
@@ -88,71 +156,194 @@ desktop.ini
 .project
 .classpath
 .settings/
+*.iml
+.vs/
+nbproject/
+.history/
 
-# Uploads & Media (local)
+
+# ============================================
+# UPLOADS & TEMP FILES (Backend)
+# ============================================
 uploads/
 temp/
 tmp/
 *.tmp
+backend/uploads/
+backend/temp/
+backend/public/uploads/
+backend/dump/
+*.bson
 
-# Cloudinary local cache
-.cloudinary/
 
-# 3D Models (large files - use CDN instead)
+# ============================================
+# SSL CERTIFICATES & KEYS
+# ============================================
+*.pem
+*.crt
+*.key
+*.p12
+*.pfx
+*.cer
+ssl/
+certs/
+
+
+# ============================================
+# PWA & GENERATED ASSETS (Frontend)
+# ============================================
+frontend/public/icons/*.png
+frontend/public/icons/*.jpg
+!frontend/public/icons/.gitkeep
+frontend/public/sw.js.map
+frontend/public/workbox-*.js
+frontend/public/workbox-*.js.map
+
+client/public/icons/*.png
+client/public/icons/*.jpg
+!client/public/icons/.gitkeep
+
+
+# ============================================
+# 3D MODELS & LARGE ASSETS
+# ============================================
+*.glb
+*.gltf
+*.fbx
+*.obj
+*.blend
+*.dae
 public/models/*.glb
 public/models/*.gltf
 public/models/*.fbx
-public/models/*.obj
 !public/models/.gitkeep
 
-# Lottie (optional - if using local files)
-# public/lottie/*.json
+frontend/public/models/*.glb
+frontend/public/models/*.gltf
+client/public/models/*.glb
 
-# PWA icons (generated)
-public/icons/*.png
-!public/icons/.gitkeep
 
-# Package manager locks (keep one)
+# ============================================
+# LOTTIE ANIMATIONS
+# ============================================
+# Uncomment if you don't want to track Lottie files
+# *.lottie.json
+# frontend/public/lottie/*.json
+
+
+# ============================================
+# COMPRESSED FILES
+# ============================================
+*.zip
+*.tar.gz
+*.tar.bz2
+*.rar
+*.7z
+*.gz
+
+
+# ============================================
+# DATABASE FILES
+# ============================================
+*.sqlite
+*.sqlite3
+*.db
+*.mdb
+*.accdb
+backend/dump/
+backend/db-backups/
+
+
+# ============================================
+# DOCKER
+# ============================================
+.dockerignore.local
+docker-compose.override.yml
+docker-compose.local.yml
+
+
+# ============================================
+# DEPLOYMENT PLATFORMS
+# ============================================
+.vercel/
+.netlify/
+.firebase/
+.render/
+.serverless/
+.aws-sam/
+.amplify/
+.fly/
+
+
+# ============================================
+# PACKAGE MANAGER LOCK FILES
+# ============================================
+# Choose ONE to keep, ignore the others
+# package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
 
-# Misc
-*.pem
-.vercel/
-.netlify/
-.render/
 
-# Diagnostic reports
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
-# Optional npm cache
-.npm/
-
-# Optional REPL history
+# ============================================
+# MISCELLANEOUS
+# ============================================
 .node_repl_history
-
-# Yarn integrity file
 .yarn-integrity
-
-# dotenv environment variable files
 .env.vault
-
-# Serverless
-.serverless/
-
-# FuseBox cache
 .fusebox/
-
-# DynamoDB Local files
 .dynamodb/
-
-# TernJS port file
 .tern-port
-
-# Stores VSCode versions used for testing
 .vscode-test/
+.history/
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+.npm/
+.eslintignore.local
 
-# Zip files
-*.zip
-*.tar.gz
-*.rar
+
+# ============================================
+# AI / ML / DATA FILES
+# ============================================
+*.h5
+*.pkl
+*.pickle
+*.model
+*.weights
+
+
+# ============================================
+# EDITOR BACKUP FILES
+# ============================================
+*.bak
+*.backup
+*.orig
+*~
+
+
+# ============================================
+# CUSTOM PROJECT FILES
+# ============================================
+# Add any project-specific files to ignore below
+
+# Test/debug scripts
+test-email.js
+testdb.js
+debug.js
+scripts/local-*
+
+# Local development overrides
+*.local
+config.local.js
+config.local.json
+
+# Notes and documentation drafts
+NOTES.md
+TODO.md
+*.draft.md
+
+# Screenshots and design files
+screenshots/
+designs/
+*.psd
+*.sketch
+*.fig
+*.xd

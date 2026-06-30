@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/icons/icon-192.png" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#0d3d35" />
     <meta
       name="description"
-      content="TalishFits — AI-powered fitness platform."
+      content="TalishFits — AI-powered fitness platform. Train smarter. Live better."
     />
 
     <link rel="manifest" href="/manifest.json" />
@@ -51,10 +51,11 @@
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          if (
+          const isLocalhost =
             window.location.hostname === "localhost" ||
-            window.location.hostname === "127.0.0.1"
-          ) {
+            window.location.hostname === "127.0.0.1";
+
+          if (isLocalhost) {
             navigator.serviceWorker.getRegistrations().then((regs) => {
               regs.forEach((reg) => reg.unregister());
             });
@@ -64,8 +65,10 @@
           } else {
             navigator.serviceWorker
               .register("/sw.js")
-              .then(() => console.log("SW registered"))
-              .catch(() => console.log("SW registration failed"));
+              .then((reg) => console.log("SW registered:", reg.scope))
+              .catch((err) =>
+                console.log("SW registration failed:", err.message),
+              );
           }
         });
       }
